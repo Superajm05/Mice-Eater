@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://btr8mpar2vywo"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_i1xv5"]
+[ext_resource type="Material" uid="uid://cqxpsh1jplsfp" path="res://Materials/Test/Yellow.tres" id="2_7dnap"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2f4cj"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nkv43"]
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bq77h"]
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
+collision_layer = 3
+up_direction = Vector3(1.04082e-12, 1, 1.04082e-12)
+script = ExtResource("1_i1xv5")
+normalCameraOffset = Vector3(2.08165e-12, 10, 6)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Hide Box" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_2f4cj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_nkv43")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_7dnap")
+mesh = SubResource("CylinderMesh_bq77h")
+skeleton = NodePath("../..")

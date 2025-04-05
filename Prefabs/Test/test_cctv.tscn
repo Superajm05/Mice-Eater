@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjbi3o5v5u4nh"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/CCTV.cs" id="1_yknuj"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Vision.cs" id="2_tdyhi"]
+[ext_resource type="Shape3D" uid="uid://cn4o55s6otpfw" path="res://Models/Primitives/cone_collision.tres" id="3_3dyxx"]
+[ext_resource type="ArrayMesh" uid="uid://crbhg3mpvndg8" path="res://Models/Primitives/Cone.tres" id="4_k80m7"]
+[ext_resource type="Texture2D" uid="uid://cg35s2pwdk26w" path="res://Imports/kenney_prototype-textures/PNG/Red/texture_01.png" id="5_d5yo5"]
+[ext_resource type="Texture2D" uid="uid://dul1cef56spel" path="res://Imports/kenney_prototype-textures/PNG/Orange/texture_01.png" id="6_8i6vr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oiktr"]
+albedo_texture = ExtResource("5_d5yo5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oobsh"]
+albedo_texture = ExtResource("6_8i6vr")
+
+[node name="CCTV" type="Node3D"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2, 2.08165e-12)
+script = ExtResource("1_yknuj")
+tilt = -30.0
+to = 90.0
+rotationSpeed = 0.5
+waitTime = 1.0
+lookAtPatience = 1.0
+
+[node name="Vision Cone" type="Area3D" parent="."]
+transform = Transform3D(5, 0, -7.62298e-23, -7.62298e-23, -2.18557e-07, -5, 0, 5, -2.18557e-07, 2.08165e-12, 2.08165e-12, -4.823)
+collision_mask = 2
+script = ExtResource("2_tdyhi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Vision Cone"]
+shape = ExtResource("3_3dyxx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vision Cone"]
+transform = Transform3D(1, 1.90516e-08, -1.85669e-08, -7.0901e-09, 1, 1.33468e-08, 5.61279e-09, -1.61325e-08, 1, 0, 0, 0)
+mesh = ExtResource("4_k80m7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 5.922e-08, -6.16146e-08, 1.11564e-07, 1, 1.08051e-07, -9.36716e-09, 1.17889e-07, 1, 0.00944831, 0.00199556, -0.0198272)
+material = SubResource("StandardMaterial3D_oiktr")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 1.14168e-07, -6.16146e-08, 1.60922e-07, 1, 1.08051e-07, -6.05201e-09, 1.17889e-07, 1, -0.00515494, 0.511665, -0.0255927)
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_oobsh")
